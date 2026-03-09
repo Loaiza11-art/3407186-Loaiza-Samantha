@@ -56,7 +56,7 @@ console.log('Código:     ACC-2026');
 
 // TODO: Reemplaza con la categoría o tipo de la entidad (string)
 // Ejemplos: 'Astronomía - Nivel básico', 'Pez cartilaginoso', 'Arte renacentista'
-console.log('Categoría:       Contabilidad');
+console.log('Categoría:       Gestión financiera');
 
 // TODO: Indica el estado actual de la entidad (string)
 // Ejemplos: 'Disponible', 'En stock', 'Activo', 'Ocupado'
@@ -74,7 +74,7 @@ console.log('--------------------');
 
 // TODO: Reemplaza con un dato numérico relevante para tu dominio (number — sin comillas)
 // Ejemplos: precio → 15000, stock → 48, páginas → 320, capacidad → 30
-console.log('Valor principal:    [NÚMERO SIN COMILLAS]');
+console.log('Valor principal:  $ 459.000');
 
 // TODO: Reemplaza el 0 por una expresión aritmética que se calcule automáticamente
 // No uses variables — escribe directamente el cálculo con números literales
@@ -82,14 +82,14 @@ console.log('Valor principal:    [NÚMERO SIN COMILLAS]');
 //   Precio con 20% descuento:  15000 * 0.8
 //   Total (cantidad × precio): 3 * 15000
 //   Capacidad restante:        30 - 12
-console.log('Valor calculado:    ', 0); // TODO: reemplaza 0 con tu cálculo
+console.log('Valor calculado:    ', 459.000 * 0,19); // TODO: reemplaza 0 con tu cálculo
 
 // TODO: Valor boolean que representa un estado de la entidad (true o false — sin comillas)
 // Ejemplos: disponible → true, enStock → false, esNuevo → true
-console.log('Estado booleano 1:  [true o false]');
+console.log('Empresa registrada: True');
 
 // TODO: Otro valor boolean diferente al anterior (true o false — sin comillas)
-console.log('Estado booleano 2:  [true o false]');
+console.log('La factura esta pagada: False');
 
 console.log('');
 
@@ -103,15 +103,15 @@ console.log('--------------------');
 
 // TODO: Escribe el nombre de tu dominio asignado (string)
 // Ejemplos: 'Planetario', 'Acuario', 'Museo', 'Zoológico'
-console.log('Dominio:          [TU DOMINIO ASIGNADO]');
+console.log('Dominio:   App de contabilidad para PYMES');
 
 // TODO: ¿Cómo se llama la entidad principal de tu dominio? (string)
 // Ejemplos: 'exhibición', 'especie', 'obra', 'animal', 'evento'
-console.log('Entidad:          [TIPO DE ENTIDAD]');
+console.log('Entidad:       REPORTE FINANCIERO');
 
 // TODO: ¿Cuántos registros tiene tu dominio en total? (number — sin comillas)
 // Puede ser un número inventado pero coherente con el dominio
-console.log('Total registros:  [NÚMERO TOTAL]');
+console.log('Total registros:  135');
 
 console.log('');
 
@@ -124,7 +124,7 @@ console.log('=========================================');
 
 // TODO: Escribe un mensaje de cierre relacionado con tu dominio (string)
 // Ejemplo (Planetario): '  ¡Explora el universo con JavaScript!'
-console.log('[MENSAJE DE CIERRE DE TU DOMINIO]');
+console.log('Facturas, reportes y estados, todo lo que necesitas en una app');
 
 console.log('=========================================');
 
