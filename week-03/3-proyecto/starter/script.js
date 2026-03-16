@@ -24,23 +24,30 @@
 //   Observatorio: SESSION_DURATION = 90, TICKET_PRICE = 18_000
 
 // const EXAMPLE_CONSTANT = 0; // TODO: Reemplazar con tus constantes
-
+const MAX_INVOICES = 100;        // máximo de facturas que puede registrar la empresa
+const TAX_RATE = 0.19;           // IVA en Colombia
+const MONTHLY_SUBSCRIPTION = 50000;  // costo mensual de la app
 // ============================================
 // SECCIÓN 2: Operaciones aritméticas
 // ============================================
 console.log("=== Operaciones básicas ===");
 
 // TODO: Calcula totales, subtotales o valores clave de tu dominio
-// Usa: +, -, *, /, %, **
-// Etiqueta cada resultado con console.log()
+// Datos financieros del mes
+const income = 2000000;   // ingresos del negocio
+const expenses = 1200000; // gastos del negocio
 
-// Ejemplo con dominio Planetario (NO copiar):
-// const ticketPrice = 12_000;
-// const attendees = 38;
-// const totalRevenue = ticketPrice * attendees;
-// console.log("Ingresos función:", totalRevenue);
-// const remainingSeats = 45 - attendees;
-// console.log("Asientos disponibles:", remainingSeats);
+// cálculo de utilidad
+const profit = income - expenses;
+console.log("Utilidad del mes:", profit);
+
+// cálculo de impuesto
+const tax = profit * TAX_RATE;
+console.log("Impuesto estimado:", tax);
+
+// ganancia después de impuestos
+const netProfit = profit - tax;
+console.log("Ganancia neta:", netProfit);
 
 console.log("");
 
@@ -50,16 +57,16 @@ console.log("");
 console.log("=== Asignación compuesta ===");
 
 // TODO: Usa +=, -=, *=, /= para actualizar valores acumulados
-// Muestra el valor antes y después de cada operación
+let totalSales = 0;
 
-// Ejemplo (NO copiar):
-// let runningTotal = 0;
-// runningTotal += 25_000;
-// console.log("Tras primer item:", runningTotal);
-// runningTotal += 18_000;
-// console.log("Tras segundo item:", runningTotal);
-// runningTotal *= 0.90; // descuento del 10%
-// console.log("Con descuento:", runningTotal);
+totalSales += 500000;
+console.log("Después de la primera venta:", totalSales);
+
+totalSales += 300000;
+console.log("Después de la segunda venta:", totalSales);
+
+totalSales *= 1.19;
+console.log("Con IVA incluido:", totalSales);
 
 console.log("");
 
@@ -69,14 +76,14 @@ console.log("");
 console.log("=== Validaciones con === ===");
 
 // TODO: Valida condiciones usando === y operadores de orden
-// NUNCA uses == (penalización en la rúbrica)
 
-// Ejemplo (NO copiar):
-// const daysLate = 5;
-// const isOnTime = daysLate === 0;
-// console.log("¿Entregado a tiempo?", isOnTime);
-// const hasFine = daysLate > 0;
-// console.log("¿Tiene multa?", hasFine);
+const invoicesToday = 50;
+
+const reachedLimit = invoicesToday === MAX_INVOICES;
+console.log("¿Se alcanzó el límite de facturas?", reachedLimit);
+
+const hasInvoicesAvailable = invoicesToday < MAX_INVOICES;
+console.log("¿Aún se pueden registrar más facturas?", hasInvoicesAvailable);
 
 console.log("");
 
@@ -86,13 +93,14 @@ console.log("");
 console.log("=== Condiciones lógicas ===");
 
 // TODO: Combina condiciones con &&, ||, !
-// Al menos una condición con && y una con ||
+const isPremiumUser = true;
+const monthlyIncome = income;
 
-// Ejemplo (NO copiar):
-// const isMember = true;
-// const purchaseAmount = 150_000;
-// const qualifiesForDiscount = isMember && purchaseAmount >= 100_000;
-// console.log("¿Descuento aplicable?", qualifiesForDiscount);
+const canAccessReports = isPremiumUser && monthlyIncome > 1000000;
+console.log("¿Puede acceder a reportes avanzados?", canAccessReports);
+
+const specialSupport = isPremiumUser || monthlyIncome > 5000000;
+console.log("¿Tiene soporte especial?", specialSupport);
 
 console.log("");
 
@@ -102,6 +110,10 @@ console.log("");
 console.log("=== Resumen ===");
 
 // TODO: Muestra un resumen con los valores más importantes
-// calculados en las secciones anteriores
+console.log("Ingresos:", income);
+console.log("Gastos:", expenses);
+console.log("Utilidad:", profit);
+console.log("Impuesto:", tax);
+console.log("Ganancia neta:", netProfit);
 
 console.log("");
