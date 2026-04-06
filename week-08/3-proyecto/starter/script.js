@@ -10,8 +10,8 @@
 // ============================================
 
 // ---- CONFIGURA TU DOMINIO ----
-const DOMAIN_NAME = "Mi Inventario"; // TODO: Cambiar por tu dominio
-const VALUE_LABEL = "elementos";     // TODO: Cambiar por unidad de tu dominio
+const DOMAIN_NAME = "Contabilidad PRYMES"; // TODO: Cambiar por tu dominio
+const VALUE_LABEL = "registros";     // TODO: Cambiar por unidad de tu dominio
 
 // ============================================
 // 1. ARRAY INICIAL — Define tu inventario
@@ -32,7 +32,51 @@ const VALUE_LABEL = "elementos";     // TODO: Cambiar por unidad de tu dominio
 // Restaurante: { id, name, price, category, available: true }
 
 const items = [
-  // TODO: Agrega al menos 5 objetos de tu dominio
+  {
+    id: 1,
+    name: "Venta Enero",
+    amount: 150000,
+    type: "ingreso",
+    active: true,
+    category: "ventas",
+    date: "2026-01-10"
+  },
+  {
+    id: 2,
+    name: "Pago proveedor",
+    amount: 50000,
+    type: "gasto",
+    active: true,
+    category: "compras",
+    date: "2026-01-12"
+  },
+  {
+    id: 3,
+    name: "Servicio internet",
+    amount: 80000,
+    type: "gasto",
+    active: false,
+    category: "servicios",
+    date: "2026-01-15"
+  },
+  {
+    id: 4,
+    name: "Venta Febrero",
+    amount: 200000,
+    type: "ingreso",
+    active: true,
+    category: "ventas",
+    date: "2026-02-01"
+  },
+  {
+    id: 5,
+    name: "Pago nómina",
+    amount: 120000,
+    type: "gasto",
+    active: true,
+    category: "empleados",
+    date: "2026-02-05"
+  }
 ];
 
 // ============================================
@@ -44,6 +88,8 @@ const items = [
  * @param {Object} newItem - Elemento a agregar
  */
 const addItem = (newItem) => {
+  items.push(newItem);
+  console.log(`Agregado: ${newItem.name}`);
   // TODO: Usar push para agregar newItem al array items
   // console.log(`Agregado: ${newItem.name}`);
 };
@@ -53,6 +99,10 @@ const addItem = (newItem) => {
  * @returns {Object} El elemento eliminado
  */
 const removeLastItem = () => {
+
+  const removed = items.pop();
+  console.log(`Eliminado: ${removed.name}`);
+  return removed;
   // TODO: Usar pop para eliminar y retornar el último elemento
   // Guardar el resultado en una variable y mostrar el nombre
 };
@@ -62,6 +112,8 @@ const removeLastItem = () => {
  * @param {Object} priorityItem - Elemento a agregar con prioridad
  */
 const addPriorityItem = (priorityItem) => {
+  items.unshift(priorityItem);
+  console.log(`Prioritario: ${priorityItem.name}`);
   // TODO: Usar unshift para agregar priorityItem al inicio de items
   // console.log(`Elemento prioritario agregado: ${priorityItem.name}`);
 };
@@ -71,6 +123,8 @@ const addPriorityItem = (priorityItem) => {
  * @param {number} index - Posición del elemento a eliminar
  */
 const removeByIndex = (index) => {
+  const removed = items.splice(index, 1);
+  console.log(`Eliminado: ${removed[0].name}`);
   // TODO: Usar splice para eliminar 1 elemento en la posición index
   // Mostrar el nombre del elemento eliminado
 };
@@ -80,6 +134,7 @@ const removeByIndex = (index) => {
  * @returns {Array} Array de elementos activos
  */
 const getActiveItems = () => {
+  return items.filter(item => item.active === true);
   // TODO: Usar filter para retornar solo los elementos con la propiedad
   // booleana en true (ajusta el nombre de la propiedad a tu dominio)
   return [];
@@ -91,6 +146,7 @@ const getActiveItems = () => {
  * @returns {Object|undefined} El elemento encontrado o undefined
  */
 const findByName = (name) => {
+  return items.find(item => item.name === name);
   // TODO: Usar find para retornar el primer elemento cuyo name coincida
   return null;
 };
@@ -101,11 +157,12 @@ const findByName = (name) => {
  * @returns {string} Texto formateado
  */
 const formatItem = (item) => {
+  return `[${item.id}] ${item.name} — $${item.amount} — ${item.type} — ${item.category}`;
   // TODO: Retornar un string con la información relevante del elemento
   // Usar template literals y mostrar las propiedades más importantes
   // Ejemplo (adaptar al dominio):
   // return `[${item.id}] ${item.name} — ...propiedades...`;
-  return `[${item.id}] ${item.name}`;
+  
 };
 
 // ============================================
@@ -128,6 +185,29 @@ console.log("\n--- Operaciones de mutación ---\n");
 // TODO: Crear un nuevo elemento de tu dominio y usar addItem para agregarlo
 // Ejemplo: addItem({ id: 6, name: "Nuevo Elemento", ..., active: true });
 
+addItem({
+  id: 6,
+  name: "Nueva venta",
+  amount: 300000,
+  type: "ingreso",
+  active: true,
+  category: "ventas",
+  date: "2026-02-10"
+});
+
+addPriorityItem({
+  id: 0,
+  name: "Pago urgente DIAN",
+  amount: 100000,
+  type: "gasto",
+  active: true,
+  category: "impuestos",
+  date: "2026-02-08"
+});
+
+removeByIndex(2);
+removeLastItem();
+
 // TODO: Usar addPriorityItem para agregar un elemento prioritario
 // Ejemplo: addPriorityItem({ id: 0, name: "Elemento Prioritario", ..., active: true });
 
@@ -146,18 +226,32 @@ console.log("\n--- Búsqueda y filtrado ---\n");
 
 // TODO: Usar find para buscar un elemento específico por nombre
 // Mostrar el resultado
-
+const result = findByName("Venta Enero");
+console.log(result);
 // TODO: Usar getActiveItems() y mostrar cuántos están activos
-
+const activeItems = getActiveItems();
+console.log(`Activos: ${activeItems.length}`);
 // TODO: Crear un snapshot inmutable con spread [...items]
 // y agregar un elemento extra sin modificar items
+const snapshot = [...items, {
+  id: 99,
+  name: "Simulación",
+  amount: 0,
+  type: "ingreso",
+  active: false,
+  category: "test"
+}];
 console.log("\n--- Transformación con map ---\n");
 
 // TODO: Usar map para crear un array de solo los nombres de los elementos
 // Mostrar los nombres
+const names = items.map(item => item.name);
+console.log(names);
 
 // TODO: Usar map para crear un array con alguna propiedad numérica transformada
 // (ej: precios con descuento, cantidades en otra unidad, etc.)
+const discounted = items.map(item => item.amount * 0.9);
+console.log(discounted);
 
 console.log("\n--- Resumen final ---\n");
 console.log(`Total en inventario: ${items.length} ${VALUE_LABEL}`);
