@@ -26,8 +26,8 @@
 // Ejemplo: const TAX_RATE = 0.19;
 //          const CURRENCY = "USD";
 //          const DOMAIN_NAME = "Mi Dominio";
-const DOMAIN_NAME = "Mi Dominio";
-const VALUE_LABEL = "valor"; // Ej: "precio", "cantidad", "duración"
+const DOMAIN_NAME = "Contabilidad PYME";
+const VALUE_LABEL = "monto"; // Ej: "precio", "cantidad", "duración"
 
 // TODO: Define un array con al menos 5 elementos de tu dominio.
 // Cada elemento debe ser un objeto con propiedades relevantes.
@@ -38,6 +38,13 @@ const VALUE_LABEL = "valor"; // Ej: "precio", "cantidad", "duración"
 //   ...
 // ];
 const items = [
+
+   { id: 1, name: "Venta productos", category: "Ingreso", value: 500000, active: true },
+  { id: 2, name: "Pago arriendo", category: "Gasto", value: 200000, active: true },
+  { id: 3, name: "Compra insumos", category: "Gasto", value: 150000, active: false },
+  { id: 4, name: "Servicio técnico", category: "Ingreso", value: 300000, active: true },
+  { id: 5, name: "Pago internet", category: "Gasto", value: 80000, active: true }
+
   // TODO: Agrega tus elementos aquí
 ];
 
@@ -57,13 +64,8 @@ const items = [
 // const formatItem = (medicine) =>
 //   `💊 ${medicine.name} — Stock: ${medicine.stock} — $${medicine.price}`;
 
-const formatItem = (item) => {
-  // TODO: Implementar usando template literals
-  // 1. Incluir el nombre del elemento
-  // 2. Incluir la categoría o tipo
-  // 3. Incluir el valor numérico relevante
-  return `${item.name}`; // TODO: Expandir este template
-};
+const formatItem = (item) =>
+  `💼 ${item.name} [${item.category}] — $${item.value.toLocaleString()}`;
 
 // ============================================
 // SECCIÓN 3: Función de cálculo (pura)
@@ -102,6 +104,7 @@ const calculateValue = (baseValue, factor = 1) => {
 // const isValid = (member) => member.active === true;
 
 const isValid = (item) => {
+
   // TODO: Implementar la condición de validez de tu dominio
   return item.active === true;
 };
@@ -121,12 +124,9 @@ const isValid = (item) => {
 // const formatPrice = (price, currency = "USD", showTax = false) =>
 //   showTax ? `${currency} ${(price * 1.19).toFixed(2)}` : `${currency} ${price.toFixed(2)}`;
 
-const formatWithDefault = (value, label = VALUE_LABEL, currency = "") => {
-  // TODO: Implementar con parámetros por defecto relevantes al dominio
-  return currency
-    ? `${label}: ${currency} ${value}`
-    : `${label}: ${value}`;
-};
+
+const formatWithDefault = (value, label = VALUE_LABEL, currency = "$") =>
+  `${label}: ${currency}${value.toLocaleString()}`;
 
 // ============================================
 // SECCIÓN 6: Reporte usando las funciones
