@@ -27,19 +27,27 @@
 // Reemplaza el nombre de la constante por algo representativo:
 // (ej: books, medicines, machines, dishes, patients...)
 const items = [
+
+  { name: "Venta enero", category: "ingresos", value: 2500000 },
+  { name: "Compra insumos", category: "gastos", value: 800000 },
+  { name: "Factura cliente A", category: "ingresos", value: 1200000 },
+  { name: "Pago empleados", category: "nomina", value: 1500000 },
+  { name: "Pago IVA", category: "impuestos", value: 600000 },
+  { name: "Servicios públicos", category: "gastos", value: 300000 }
+
   // TODO: Agrega tus elementos aquí
   // { name: "nombre del elemento", category: "categoría", value: 0 }
 ];
 
 // TODO: Define las categorías relevantes para tu dominio
 // (ej: para Biblioteca sería ["ficción", "no-ficción", "ciencia"])
-const categories = [
+const categories = ["ingresos", "gastos", "nomina", "impuestos"];
   // TODO: lista tus categorías
-];
+
 
 // TODO: Define un nombre descriptivo para el valor numérico
 // (ej: "páginas", "stock", "horas de uso", "precio", "duración")
-const valueLabel = "valor"; // ← cambiar
+const valueLabel = "dinero ($)"; // ← cambiar
 
 // ============================================
 // SECCIÓN 2: Listado completo con for...of
@@ -54,7 +62,7 @@ let lineNumber = 0;
 for (const item of items) {
   lineNumber++;
   // TODO: Reemplaza este console.log con la información de tu dominio
-  console.log(`${lineNumber}. ${item.name}`);
+  console.log(`${lineNumber}. ${item.name} — ${item.category} — ${valueLabel}: ${item.value}`);
 }
 
 console.log("");
@@ -75,6 +83,11 @@ for (const category of categories) {
   // for (const item of items) {
   //   if (item.category === category) count++;
   // }
+  for (const item of items) {
+    if (item.category === category) {
+      count++;
+    }
+  }
 
   console.log(`${category}: ${count} elemento(s)`);
 }
@@ -91,7 +104,7 @@ let totalValue = 0;
 
 for (const item of items) {
   // TODO: Acumula el valor de cada elemento
-  // totalValue += item.value;
+  totalValue += item.value;
 }
 
 // TODO: Calcula el promedio
@@ -115,7 +128,14 @@ let minItem = items[0] ?? null;
 if (items.length > 0) {
   // TODO: Recorre con for...of y compara values para encontrar max y min
   for (const item of items) {
+      if (item.value > maxItem.value) {
+    maxItem = item;
+  }
+
     // TODO: Comparar y actualizar maxItem y minItem
+    if (item.value < minItem.value) {
+    minItem = item;
+  }
   }
 
   // TODO: Imprime los resultados
@@ -137,7 +157,9 @@ for (let i = 0; i < items.length; i++) {
 
   // TODO: Determina si el item está sobre o bajo el promedio
   // Pista: usa el operador ternario o if/else
-  const comparison = ""; // TODO: "sobre el promedio" o "bajo el promedio"
+  const comparison = item.value >= averageValue 
+    ? "sobre el promedio" 
+    : "bajo el promedio"; // TODO: "sobre el promedio" o "bajo el promedio"
 
   // TODO: Imprime la línea del reporte
   console.log(`${i + 1}. ${item.name} — ${comparison}`);
