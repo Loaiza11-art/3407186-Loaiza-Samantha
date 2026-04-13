@@ -220,19 +220,7 @@ const sortByNumericProp = (ascending = true) => {
 /**
  * Imprime el reporte completo del catálogo
  */
-const buildReport = () => {
-  console.log("\n" + "=".repeat(50));
-  console.log(`📦 CATÁLOGO: ${DOMAIN_NAME.toUpperCase()}`);
-  console.log("=".repeat(50));
 
-  // TODO: Mostrar cantidad total de elementos
-  // TODO: Mostrar cuántos están disponibles/activos
-  // TODO: Mostrar estadísticas de la propiedad numérica principal
-  // TODO: Listar todos los elementos ordenados (usar sortByNumericProp)
-  // TODO: Mostrar el elemento con el valor numérico más alto y más bajo
-
-  console.log("=".repeat(50));
-};
 
 // ============================================
 // EJECUCIÓN PRINCIPAL
