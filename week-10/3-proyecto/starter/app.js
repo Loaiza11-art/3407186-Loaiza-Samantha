@@ -13,213 +13,245 @@
 // ============================================
 
 // ============================================
-// SECCIÓN 1: Configuración y Constantes (Semanas 01–02)
+// CONFIGURACIÓN GENERAL DEL SISTEMA
 // ============================================
 
-// TODO: Renombrar con el nombre de tu dominio (en inglés, UPPER_SNAKE_CASE)
-const DOMAIN_NAME = "Mi Aplicación";
-const VALUE_LABEL = "elementos";
+// Nombre del sistema (nuestro dominio)
+const DOMAIN_NAME = "ACCOUNTING_APP";
 
-// TODO: Ajustar al límite razonable para tu dominio
-// Usa separadores numéricos (ES2021): 1_000, 10_000
+// Nombre de los elementos que manejamos (transacciones)
+const VALUE_LABEL = "transactions";
+
+// Límite máximo de registros permitidos
 const MAX_ITEMS = 1_000;
 
+
 // ============================================
-// SECCIÓN 2: Datos — Array Principal (Semanas 01–02)
+// BASE DE DATOS (ARRAY PRINCIPAL)
 // ============================================
 
-// TODO: Definir el array con MÍNIMO 6 objetos
-// Requisitos:
-// - Mínimo 5 propiedades por objeto (tipos mixtos)
-// - Al menos 1 propiedad numérica (para calcular estadísticas)
-// - Al menos 1 propiedad booleana (para filtrar activos/inactivos)
-// - Al menos 1 propiedad OPCIONAL (no todos los objetos la tienen)
-//
-// Nota para el aprendiz — Adaptaciones por dominio:
-// - Biblioteca:    { id, title, author, year, pages, available, notes? }
-// - Farmacia:      { id, name, price, stock, laboratory, active, prescription? }
-// - Gimnasio:      { id, name, memberType, fee, joinDate, active, plan? }
-// - Restaurante:   { id, name, category, price, calories, available, allergens? }
-// - Banco:         { id, owner, type, balance, rate, active, creditLimit? }
-
+// Este array simula una base de datos de transacciones contables
 const items = [
-  // TODO: Reemplazar con objetos de tu dominio
   {
-    id: 1,
-    name: "Elemento 1",
-    value: 100,
-    active: true,
-    category: "tipo-a",
+    id: 1, // Identificador único
+    description: "Venta de productos", // Qué ocurrió
+    amount: 500, // Valor monetario
+    type: "income", // Tipo: ingreso
+    active: true, // Estado: activo
+    category: "ventas", // Categoría
   },
   {
     id: 2,
-    name: "Elemento 2",
-    value: 200,
+    description: "Pago de arriendo",
+    amount: 300,
+    type: "expense", // Tipo: gasto
     active: true,
-    category: "tipo-b",
-    notes: "Propiedad opcional de ejemplo",
+    category: "gastos fijos",
+    notes: "Pago mensual", // Propiedad opcional
   },
   {
     id: 3,
-    name: "Elemento 3",
-    value: 150,
-    active: false,
-    category: "tipo-a",
+    description: "Compra de insumos",
+    amount: 200,
+    type: "expense",
+    active: false, // Este está inactivo
+    category: "inventario",
   },
-  // TODO: Agregar al menos 3 objetos más (mínimo 6 en total)
+  {
+    id: 4,
+    description: "Mantenimiento",
+    amount: 150,
+    type: "expense",
+    active: true,
+    category: "servicios",
+  },
+  {
+    id: 5,
+    description: "Asesoría contable",
+    amount: 400,
+    type: "income",
+    active: true,
+    category: "servicios",
+  },
+  {
+    id: 6,
+    description: "Pago internet",
+    amount: 100,
+    type: "expense",
+    active: true,
+    category: "gastos fijos",
+  },
 ];
 
+
 // ============================================
-// SECCIÓN 3: Funciones CRUD (Semanas 07–08)
+// FUNCIONES CRUD (OPERACIONES BÁSICAS)
 // ============================================
 
 /**
- * Agrega un nuevo elemento al array principal
- * @param {Object} item - El elemento a agregar
+ * Agrega una nueva transacción al sistema
  */
 const addItem = (item) => {
-  // TODO: Implementar
-  // 1. Verificar que no supere MAX_ITEMS (usar items.length)
-  // 2. Agregar el item al array con .push()
-  // 3. Mostrar confirmación con console.log y template literal
+  // Verifica que no se supere el límite permitido
+  if (items.length >= MAX_ITEMS) {
+    console.log("❌ Límite alcanzado");
+    return;
+  }
+
+  // Agrega el nuevo elemento al array
+  items.push(item);
+
+  // Mensaje de confirmación
+  console.log(`✅ Transacción agregada: ${item.description}`);
 };
 
+
 /**
- * Busca un elemento por su id
- * @param {number} id - El id a buscar
- * @returns {Object|undefined} - El elemento encontrado o undefined
+ * Busca una transacción por su ID
  */
 const findById = (id) => {
-  // TODO: Implementar usando .find()
-  return null;
+  // Usa find para devolver el primer elemento que coincida
+  return items.find(item => item.id === id);
 };
 
+
 /**
- * Retorna todos los elementos activos
- * @returns {Object[]}
+ * Obtiene todas las transacciones activas
  */
 const getActive = () => {
-  // TODO: Implementar usando .filter() con la propiedad booleana
-  return [];
+  // Filtra solo los elementos cuyo estado sea true
+  return items.filter(item => item.active);
 };
 
+
 /**
- * Filtra elementos por el valor de un campo
- * @param {string} field - El nombre de la propiedad
- * @param {*} value - El valor a buscar
- * @returns {Object[]}
+ * Filtra transacciones por cualquier campo
  */
 const filterByField = (field, value) => {
-  // TODO: Implementar usando .filter()
-  return [];
+  // Accede dinámicamente a la propiedad usando item[field]
+  return items.filter(item => item[field] === value);
 };
 
+
 // ============================================
-// SECCIÓN 4: Funciones de Análisis (Semanas 08–09)
+// FUNCIONES DE ANÁLISIS
 // ============================================
 
 /**
- * Actualiza un elemento de forma inmutable usando spread
- * @param {number} id - Id del elemento a actualizar
- * @param {Object} changes - Objeto con los cambios a aplicar
- * @returns {Object[]} - Nuevo array con el elemento actualizado
+ * Actualiza una transacción sin modificar el array original
  */
 const updateItem = (id, changes) => {
-  // TODO: Implementar
-  // 1. Usar .map() para crear un nuevo array
-  // 2. Para el item con el id buscado: retornar { ...item, ...changes }
-  // 3. Para los demás: retornar el item sin cambios
-  return items.map((item) => item); // reemplazar esta línea
+  return items.map(item =>
+    // Si el id coincide, crea una copia con los cambios
+    item.id === id
+      ? { ...item, ...changes }
+      : item // Si no, lo deja igual
+  );
 };
 
+
 /**
- * Calcula estadísticas de un campo numérico
- * @param {string} field - El nombre de la propiedad numérica
- * @returns {{ min: number, max: number, avg: number, total: number }}
+ * Calcula estadísticas sobre un campo numérico
  */
 const calculateStats = (field) => {
-  // TODO: Implementar
-  // 1. Extraer los valores numéricos con Object.values o .map()
-  // 2. Calcular: min (Math.min), max (Math.max), avg (sum/length), total (sum)
-  // Pista: const values = items.map(i => i[field]);
-  return { min: 0, max: 0, avg: 0, total: 0 };
+  // Extrae todos los valores del campo (ej: amount)
+  const values = items.map(i => i[field]);
+
+  // Suma todos los valores usando reduce
+  const total = values.reduce((acc, val) => acc + val, 0);
+
+  // Obtiene el valor mínimo
+  const min = Math.min(...values);
+
+  // Obtiene el valor máximo
+  const max = Math.max(...values);
+
+  // Calcula el promedio
+  const avg = total / values.length;
+
+  // Retorna un objeto con todos los resultados
+  return { min, max, avg, total };
 };
 
+
 // ============================================
-// SECCIÓN 5: Funciones de Display (Semanas 04–07)
+// FUNCIONES DE VISUALIZACIÓN
 // ============================================
 
 /**
- * Formatea un elemento para mostrar en consola (una línea)
- * @param {Object} item - El elemento a formatear
- * @returns {string}
+ * Formatea una transacción para mostrarla en consola
  */
 const formatItem = (item) => {
-  // TODO: Implementar usando template literals
-  // 1. Usar .padEnd() o .padStart() para alinear columnas
-  // 2. Usar ?? y ?. para propiedades opcionales
-  // 3. Retornar string (NO hacer console.log aquí)
-  return `[${item.id}] ${item.name}`;
+  return `[${item.id}] ${item.description.padEnd(25)} | $${item.amount} | ${item.type} | ${item.active ? "Activo" : "Inactivo"} | ${item.notes ?? "Sin notas"}`;
 };
+
 
 /**
- * Genera el reporte completo del dominio
- * Usa: Object.entries, forEach, filter, map, calculateStats
+ * Genera un reporte completo del sistema
  */
 const buildReport = () => {
-  // TODO: Implementar
-  // 1. Cabecera: título del dominio con template literal
-  // 2. Listado completo usando formatItem + forEach
-  // 3. Sección de activos vs inactivos (getActive)
-  // 4. Estadísticas con calculateStats para la propiedad numérica
-  // 5. Propiedades del primer elemento con Object.entries
-  // 6. Pie de reporte con conteo total
-  console.log(`Reporte de ${DOMAIN_NAME}`);
-  console.log("=".repeat(40));
-  items.forEach((item) => console.log(formatItem(item)));
+  console.log(`📊 Reporte de ${DOMAIN_NAME}`);
+  console.log("=".repeat(50));
+
+  // Muestra todas las transacciones formateadas
+  items.forEach(item => console.log(formatItem(item)));
+
+  // Calcula activos
+  const active = getActive();
+  console.log(`\nActivos: ${active.length}`);
+  console.log(`Inactivos: ${items.length - active.length}`);
+
+  // Muestra estadísticas del campo amount
+  const stats = calculateStats("amount");
+  console.log(`\nTotal: ${stats.total}`);
+  console.log(`Promedio: ${stats.avg.toFixed(2)}`);
+
+  // Muestra las propiedades del primer objeto
+  console.log("\nPropiedades del primer item:");
+  Object.entries(items[0]).forEach(([key, value]) => {
+    console.log(`${key}: ${value}`);
+  });
+
+  // Total de registros
+  console.log(`\nTotal de registros: ${items.length}`);
 };
 
+
 // ============================================
-// SECCIÓN 6: Ejecución Principal
+// EJECUCIÓN PRINCIPAL
 // ============================================
-//
-// TODO: Descomentar a medida que implementes cada función
-//
 
+// Encabezado del programa
 console.log("=".repeat(40));
-console.log(`  ${DOMAIN_NAME.toUpperCase()}`);
+console.log(`  ${DOMAIN_NAME}`);
 console.log("=".repeat(40));
-console.log(`Total de ${VALUE_LABEL}: ${items.length} / ${MAX_ITEMS}`);
-console.log("");
 
-// Paso 1: Buscar por id
-// const found = findById(1);
-// console.log("Encontrado id=1:", found?.name ?? "no encontrado");
-// console.log("");
 
-// Paso 2: Listar activos
-// const active = getActive();
-// console.log(`Activos: ${active.length}`);
-// active.forEach(item => console.log(" ", formatItem(item)));
-// console.log("");
+// Buscar una transacción
+const found = findById(1);
+console.log("Encontrado:", found?.description ?? "No existe");
 
-// Paso 3: Filtrar por campo
-// const filtered = filterByField("category", "tipo-a");
-// console.log(`Filtro category=tipo-a: ${filtered.length} resultados`);
-// console.log("");
 
-// Paso 4: Actualizar con spread
-// const updated = updateItem(1, { value: 999 });
-// console.log(`Actualizado id=1: value=${updated.find(i => i.id === 1)?.value}`);
-// console.log("");
+// Obtener activos
+const active = getActive();
+console.log("Activos:", active.length);
 
-// Paso 5: Estadísticas
-// const stats = calculateStats("value");
-// console.log(`Estadísticas (value): min=${stats.min} max=${stats.max} avg=${stats.avg.toFixed(2)}`);
-// console.log("");
 
-// Paso 6: Reporte completo
-// buildReport();
+//Calcular estadísticas
+const stats = calculateStats("amount");
+console.log("Stats:", stats);
 
-// TODO: Agregar un nuevo elemento usando addItem
-// addItem({ id: 7, name: "Nuevo elemento", value: 300, active: true, category: "tipo-a" });
+
+// Generar reporte completo
+buildReport();
+
+
+// ➕ Agregar nueva transacción
+addItem({
+  id: 7,
+  description: "Nuevo ingreso",
+  amount: 600,
+  type: "income",
+  active: true,
+  category: "ventas",
+});
