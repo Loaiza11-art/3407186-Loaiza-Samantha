@@ -211,7 +211,7 @@ const sortByNumericProp = (ascending = true) => {
   return [...items].sort((a, b) =>
     ascending ? a.amount - b.amount : b.amount - a.amount
   );
-};;
+};
 
 // ============================================
 // REPORTE FINAL
@@ -220,7 +220,6 @@ const sortByNumericProp = (ascending = true) => {
 /**
  * Imprime el reporte completo del catálogo
  */
-
 
 // ============================================
 // EJECUCIÓN PRINCIPAL
@@ -242,10 +241,41 @@ const buildReport = () => {
   console.log("\nOrdenados:");
   ordenados.forEach(i => console.log(i.name, i.amount));
 
+const max = ordenados[ordenados.length - 1];
+const min = ordenados[0];
+
+console.log("\nMayor monto:", max.name, max.amount);
+console.log("Menor monto:", min.name, min.amount);  
+
   console.log("=".repeat(50));
 };
 
 // TODO: Llamar a las funciones implementadas en este orden:
+inspectItem(items[0]);
+
+calculateStats("amount");
+
+items.forEach(showWithOptionals);
+
+printAllProperties(items[0]);
+
+console.log("\nUpdate:");
+console.log(updateItem(items[0], { amount: 999999 }));
+
+console.log("\nDisponibles:");
+console.log(getAvailable());
+
+console.log("\nBuscar ID:");
+console.log(findById(2));
+console.log(findById(99));
+
+console.log("\nCon IVA:");
+console.log(addCalculatedProp());
+
+console.log("\nOrdenados:");
+console.log(sortByNumericProp());
+
+buildReport();
 // 1. inspectItem(items[0])
 // 2. calculateStats("nombreDeTuPropiedadNumerica")
 // 3. items.forEach(showWithOptionals)
